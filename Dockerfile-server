@@ -5,3 +5,19 @@ COPY main/xiaozhi-server .
 
 # 启动应用
 CMD ["python", "app.py"]
+
+
+FROM python:3.10-slim
+WORKDIR /app
+COPY . /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV QWEN_API_KEY=your_qwen_api_key_here
+CMD ["python", "main/server.py"]
+
+FROM python:3.10-slim
+WORKDIR /app
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "app.py"]
