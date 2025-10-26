@@ -1,7 +1,6 @@
 import os
 import json
 import faiss
-import numpy as np
 from sentence_transformers import SentenceTransformer
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "rag_data")
@@ -33,8 +32,8 @@ class RAGEngine:
         self.index = index
 
     def retrieve(self, query, top_k=3):
-        if self.index is None:
-            self._load_index()
         q_vec = self.model.encode([query], convert_to_numpy=True)
         D, I = self.index.search(q_vec, top_k)
         return [self.texts[i] for i in I[0]]
+
+rag_engine = RAGEngine()

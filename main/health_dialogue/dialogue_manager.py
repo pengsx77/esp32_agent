@@ -10,13 +10,13 @@ class DialogueManager:
             self.dialogues = json.load(f)
 
     def get_today_theme(self):
-        # 每7天切换主题
         week = datetime.date.today().isocalendar()[1]
-        theme_index = (week % len(self.dialogues))
+        theme_index = week % len(self.dialogues)
         theme_name = list(self.dialogues.keys())[theme_index]
         return theme_name, self.dialogues[theme_name]
 
     def get_daily_questions(self):
         theme, questions = self.get_today_theme()
-        # 取2个随机问题
         return theme, random.sample(questions, min(2, len(questions)))
+
+dialogue_manager = DialogueManager()

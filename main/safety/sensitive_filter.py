@@ -3,3 +3,5 @@ class SensitiveFilter:
 
     def contains_sensitive(self, text: str) -> bool:
         return any(w in text for w in self.SENSITIVE_WORDS)
+
+sensitive_filter = SensitiveFilter()
